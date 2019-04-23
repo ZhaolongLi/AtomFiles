@@ -1,0 +1,79 @@
+__原在线接口文档地址__：https://www.tapd.cn/64162064/documents/show/1164162064001000119  
+
+## 1.查询历史对账单的金额合计
+  __url__:/general/model/notifier/request/get_total_paid_statements/  
+  __method__:get  
+  __header__:
+
+  | 参数名称 | 参数值 | 描述 |
+  | ----- | ----- |
+  | qqxb_id | 用户的UsermemberID | -- |
+  | Authorization | 登录返回的jwt值 | 也可以是参数，如?jwt=xxx |
+__返回值__:
+  ```
+  {
+    "rescode": 0,
+    "data": {
+        "labor": { //劳务外包业务费
+            "labor_cut": { // 扣费
+                "income": 0, // 收入，单位为：分，以下同
+                "expense": 0 // 支出
+            },
+            "labor_refund": { // 退费
+                "income": 0,
+                "expense": 0
+            }
+        },
+        "service": { // 劳务外包服务费
+            "labor_service_cut": { // 扣费
+                "income": 0,
+                "expense": 0
+            },
+            "labor_service_refund": { // 退费
+                "income": 0,
+                "expense": 0
+            }
+        }
+    }
+}
+  ```
+## 2.查询历史对账单中的明细
+__url__:/general/model/notifier/request/get_paid_statements/  
+__method__:get  
+__header__:  
+
+| 参数名称 | 参数值 | 描述 |
+| ----- | ----- |
+| qqxb_id | -- | 用户的UsermemberID |
+| start_date | -- | 查询的开始日期 |
+| end_date | -- | 查询的截止日期 |
+| current_page | -- | 查询页的页码 |
+| page_size | -- | 页面大小 |
+| Authorization | 登录返回的jwt值 | 也可以是参数，如?jwt=xxx |  
+__返回值__:
+
+```
+{
+    "rescode": 0,
+    "data": {
+        "labor": { // 劳务外包业务费
+            "cut": [ // 扣费
+                {
+                    "create_time": "2019-04-19 13:42:56", // 创建时间
+                    "ni_type": "劳务费", // 费用类型
+                    "price": 10545000, // 费用金额，单位：分
+                    "trasaction": "第一次扣费说明", // 费用事由
+                    "p_type": "劳务外包", // 项目类型
+                    "title": "项目标题123456", // 项目标题
+                    "n_type": "扣费" // 扣费或退费
+                }
+            ],
+            "refund": []
+        },
+        "labor_service": { // 劳务外包服务费
+            "cut": [],
+            "refund": []
+        }
+    }
+}
+```

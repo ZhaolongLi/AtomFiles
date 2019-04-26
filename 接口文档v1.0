@@ -1,8 +1,8 @@
-__原在线接口文档地址__：https://www.tapd.cn/64162064/documents/show/1164162064001000119  
+__原在线接口文档地址__：https://www.tapd.cn/64162064/documents/show/1164162064001000119
 
 ## 1.查询历史对账单的金额合计
-  __url__:/general/model/notifier/request/get_total_paid_statements/  
-  __method__:get  
+  __url__:/general/model/notifier/request/get_total_paid_statements/
+  __method__:get
   __header__:
 
   | 参数名称 | 参数值 | 描述 |
@@ -38,9 +38,9 @@ __返回值__:
 }
   ```
 ## 2.查询历史对账单中的明细
-__url__:/general/model/notifier/request/get_paid_statements/  
-__method__:get  
-__header__:  
+__url__:/general/model/notifier/request/get_paid_statements/
+__method__:get
+__header__:
 
 | 参数名称 | 参数值 | 描述 |
 | ----- | ----- |
@@ -49,35 +49,34 @@ __header__:
 | end_date | -- | 查询的截止日期 |
 | current_page | -- | 查询页的页码 |
 | page_size | -- | 页面大小 |
-| Authorization | 登录返回的jwt值 | 也可以是参数，如?jwt=xxx |  
+| p_type | -- | 业务类型 |
+| n_type | -- | 费用类型 |
+| Authorization | 登录返回的jwt值 | 也可以是参数，如?jwt=xxx |
 __返回值__:
 
 ```
 {
     "rescode": 0,
     "data": {
-        "labor": { // 劳务外包业务费
-            "cutAmount": 1, // 扣费记录数量
-            "cut": [ // 扣费
-                {
-                    "create_time": "2019-04-19 13:42:56", // 创建时间
-                    "ni_type": "劳务费", // 费用类型
-                    "price": 10545000, // 费用金额，单位：分
-                    "trasaction": "第一次扣费说明", // 费用事由
-                    "p_type": "劳务外包", // 项目类型
-                    "title": "项目标题123456", // 项目标题
-                    "n_type": "扣费" // 扣费或退费
-                }
-            ],
-            "refundAmount":0, // 退费记录数量
-            "refund": []
-        },
-        "labor_service": { // 劳务外包服务费
-            "cutAmount": 0,
-            "cut": [],
-            "refundAmount": 0,
-            "refund": []
-        }
+        "Amount": 2, // 记录数量
+        "itemList": [
+            {
+                "create_time": "2019-04-19 13:42:56",// 创建时间
+                "ni_type": "服务费（个人）",// 费用类型
+                "price": 555000,// 费用金额，单位：分
+                "trasaction": "第一次扣费说明",// 费用事由
+                "title": "项目标题123456",// 项目标题
+                "n_type": "扣费"// 扣费或退费
+            },
+            {
+                "create_time": "2019-04-19 13:42:56",
+                "ni_type": "服务费（企业）",
+                "price": 316350,
+                "trasaction": "第一次扣费说明",
+                "title": "项目标题123456",
+                "n_type": "扣费"
+            }
+        ]
     }
 }
 ```
